@@ -9,18 +9,18 @@ using Microsoft.Extensions.Configuration;
 
 namespace Application.Infrastructure.Persistence
 {
-    public class CarRentalDbContext:DbContext
+    public class CarRentalDbContext:DbContext,ICarRentalDbContext
     {
-        public DbSet<ColorType> ColorTypes { get; set; }
-        public DbSet<FuelType> FuelTypes { get; set; }
-        public DbSet<RentalPeriod> RentalPeriods { get; set; }
-        public DbSet<TireType> TireTypes { get; set; }
-        public DbSet<TransmissionType> TransmissionTypes { get; set; }
-        public DbSet<Vehicle> Vehicles { get; set; }
-        public DbSet<VehicleBrand> VehicleBrands { get; set; }
-        public DbSet<VehicleClassType> VehicleClassTypes { get; set; }
-        public DbSet<VehicleModel> VehicleModels { get; set; }
-        public DbSet<VehicleRentalPrice> VehicleRentalPrices { get; set; }
+        public DbSet<ColorType> ColorType { get; set; }
+        public DbSet<FuelType> FuelType { get; set; }
+        public DbSet<RentalPeriod> RentalPeriod { get; set; }
+        public DbSet<TireType> TireType { get; set; }
+        public DbSet<TransmissionType> TransmissionType { get; set; }
+        public DbSet<Vehicle> Vehicle { get; set; }
+        public DbSet<VehicleBrand> VehicleBrand { get; set; }
+        public DbSet<VehicleClassType> VehicleClassType { get; set; }
+        public DbSet<VehicleModel> VehicleModel { get; set; }
+        public DbSet<VehicleRentalPrice> VehicleRentalPrice { get; set; }
 
         public readonly string _connectionString;
         public CarRentalDbContext(DbContextOptions<CarRentalDbContext> options,IConfiguration configuration) : base(options)
