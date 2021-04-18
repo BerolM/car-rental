@@ -13,10 +13,18 @@ namespace Application.Services.Concrete
         {
             Context = context;
         }
-        public void Add(VehicleBrand vehicleBrand)
+        public Response Add(VehicleBrand vehicleBrand)
         {
+            int sameNumberOfRecords = Context.VehicleBrand.Where(v => v.Name == vehicleBrand.Name).Count();
+            if (sameNumberOfRecords>0)
+            {
+                return Response.Fail($"{vehicleBrand.Name} markası sistemde zaten kayıtlıdır.");          
+            }
             Context.VehicleBrand.Add(vehicleBrand);
             Context.SaveChanges();
+
+            return Response.Success("Marka başarıyla kaydedildi.");
+
         }
         public void Update(VehicleBrand vehicleBrand)
         {
