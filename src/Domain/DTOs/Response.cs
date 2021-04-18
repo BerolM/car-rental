@@ -11,13 +11,13 @@ namespace Domain.DTOs
         public bool IsSuccess { get; private protected set; }
         public string Message { get; private protected set; }
         public TData Data { get; private protected set; }
-        public static Response<TData> Success(string message = "",TData data=default(TData))
+        public static Response<TData> Success(string message = "", TData data = default(TData))
         {
             return new Response<TData>
             {
                 IsSuccess = true,
                 Message = message,
-                Data=data
+                Data = data
             };
         }
         public static Response<TData> Fail(string message)
@@ -37,8 +37,8 @@ namespace Domain.DTOs
         {
             return new Response
             {
-                IsSuccess=true,
-                Message=message
+                IsSuccess = true,
+                Message = message
             };
         }
         public static new Response Fail(string message)

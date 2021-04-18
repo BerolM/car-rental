@@ -15,28 +15,46 @@ namespace Application.Services.Concrete
         }
         public Response Add(VehicleBrand vehicleBrand)
         {
-            int sameNumberOfRecords = Context.VehicleBrand.Where(v => v.Name == vehicleBrand.Name).Count();
-            if (sameNumberOfRecords>0)
-            {
-                return Response.Fail($"{vehicleBrand.Name} markası sistemde zaten kayıtlıdır.");          
-            }
+            var checkResponse = ChechToAddOrUpdate(vehicleBrand);
+            if (!checkResponse.IsSuccess)
+                return checkResponse;
+
             Context.VehicleBrand.Add(vehicleBrand);
             Context.SaveChanges();
 
             return Response.Success("Marka başarıyla kaydedildi.");
 
         }
-        public void Update(VehicleBrand vehicleBrand)
+        private Response ChechToAddOrUpdate(VehicleBrand vehicleBrand)
         {
+            int sameNumberOfRecords = (from b in Context.VehicleBrand
+                                       where b.Name == vehicleBrand.Name && b.Id != vehicleBrand.Id
+                                       select b
+                                          ).Count();
+            if (sameNumberOfRecords > 0)
+            {
+                return Response.Fail($"{vehicleBrand.Name} markası sistemde zaten kayıtlıdır.");
+            }
+            return Response.Success();
+
+        }
+        public Response Update(VehicleBrand vehicleBrand)
+        {
+            var checkResponse = ChechToAddOrUpdate(vehicleBrand);
+            if (!checkResponse.IsSuccess)
+                return checkResponse;
             var vehicleBrandToUpdate = GetById(vehicleBrand.Id);
             vehicleBrandToUpdate.Name = vehicleBrand.Name;
             Context.SaveChanges();
+            return Response.Success("Marka başarıyla güncellendi.");
         }
-        public void Delete(int id)
+        public Response Delete(int id)
         {
             var vehicleBrandToDelete = GetById(id);
             Context.VehicleBrand.Remove(vehicleBrandToDelete);
             Context.SaveChanges();
+
+            return Response.Success("Marka başarıyla silindi.");
         }
         public VehicleBrand GetById(int id)
         {
