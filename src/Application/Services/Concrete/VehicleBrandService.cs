@@ -18,6 +18,7 @@ namespace Application.Services.Concrete
             var checkResponse = ChechToAddOrUpdate(vehicleBrand);
             if (!checkResponse.IsSuccess)
                 return checkResponse;
+
             Context.VehicleBrand.Add(vehicleBrand);
             Context.SaveChanges();
 
