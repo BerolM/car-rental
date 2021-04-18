@@ -2,12 +2,18 @@
 
 @{
     ViewData["Title"] = "Araç Marka Düzenleme";
+    Response response = ViewBag.Response;
 }
 
 <h1>Araç Marka Düzenleme</h1>
 
 <h4>Araç Markası</h4>
 <hr />
+
+@if (response != null)
+{
+    <message-box is-success="@response.IsSuccess" message="@response.Message"></message-box>
+}
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">

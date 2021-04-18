@@ -7,9 +7,9 @@ namespace Application.Services
 {
     public interface IVehicleBrandService
     {
-        void Add(VehicleBrand vehicleBrand);
-        void Update(VehicleBrand vehicleBrand);
-        void Delete(int id);
+        Response Add(VehicleBrand vehicleBrand);
+        Response Update(VehicleBrand vehicleBrand);
+        Response Delete(int id);
         VehicleBrand GetById(int id);
         List<VehicleBrand> Get(VehicleBrandFilter filter);
 
