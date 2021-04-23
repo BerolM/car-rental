@@ -35,6 +35,7 @@ namespace WebApp
             services.AddScoped<IColorTypeService, ColorTypeService>();
             services.AddScoped<IFuelTypeService, FuelTypeService>();
             services.AddScoped<IRentalPeriodService, RentalPeriodService>();
+            services.AddScoped<ITireTypeService, TireTypeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
