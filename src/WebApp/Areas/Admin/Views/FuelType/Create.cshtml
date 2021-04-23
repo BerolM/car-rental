@@ -1,13 +1,13 @@
-﻿@model Domain.Entities.ColorType
+﻿@model Domain.Entities.FuelType
 
 @{
-    ViewData["Title"] = "Araç Renk Düzenleme";
+    ViewData["Title"] = "Yeni Ataç Yakıt Tipi";
     Response response = ViewBag.Response;
 }
 
-<h1>Araç Renk Düzenleme</h1>
+<h1>Yeni Ataç Yakıt Tipi</h1>
 
-<h4>Araç Rengi</h4>
+<h4>Araç Yakıt Tipi</h4>
 <hr />
 @if (response != null)
 {
@@ -15,9 +15,8 @@
 }
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @Html.HiddenFor(x => x.Id)
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
