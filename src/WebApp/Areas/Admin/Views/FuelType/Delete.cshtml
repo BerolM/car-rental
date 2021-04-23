@@ -1,14 +1,14 @@
-﻿@model Domain.Entities.ColorType
+﻿@model Domain.Entities.FuelType
 
 @{
-    ViewData["Title"] = "Araç Rengi Silme";
+    ViewData["Title"] = "Araç Yakıt Tipi Silme";
 }
 
-<h1>Araç Rengi Silme</h1>
+<h1>Araç Yakıt Tipi Silme</h1>
 
-<h3>Rengi silmek istediğinize emin misiniz?</h3>
+<h3>Yakıt tipini silmek istediğinize emin misiniz?</h3>
 <div>
-    <h4>Araç Rengi</h4>
+    <h4>Araç Yalıt Tipi</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -20,7 +20,7 @@
     </dl>
     
     <form asp-action="Delete">
-        @Html.HiddenFor(model=>model.Id)
+        @Html.HiddenFor(model => model.Id)
         <input type="submit" value="Sil" class="btn btn-danger" /> |
         <a asp-action="Index">Araç Marka Listesi</a>
     </form>
