@@ -12,41 +12,41 @@ namespace WebApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("admin/[controller]/[action]")]
-    public class ColorTypeController : Controller
+    public class TransmissionTypeController : Controller
     {
-        private IColorTypeService ColorTypeService { get; }
-        public ColorTypeController(IColorTypeService colorTypeService)
+        private ITransmissionTypeService TransmissionTypeService { get; }
+        public TransmissionTypeController(ITransmissionTypeService transmissionTypeService)
         {
-            ColorTypeService = colorTypeService;
+            TransmissionTypeService = transmissionTypeService;
         }
-        // GET: ColorTypeController
+        // GET: TransmissionTypeController
         public ActionResult Index()
         {
-            ColorTypeFilter filter = new ColorTypeFilter();
-            var items = ColorTypeService.Get(filter);
+            TransmissionTypeFilter filter = new TransmissionTypeFilter();
+            var items = TransmissionTypeService.Get(filter);
             return View(items);
         }
 
-        // GET: ColorTypeController/Details/5
+        // GET: TransmissionTypeController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: ColorTypeController/Create
+        // GET: TransmissionTypeController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: ColorTypeController/Create
+        // POST: TransmissionTypeController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ColorType colorType)
+        public ActionResult Create(TransmissionType transmissionType)
         {
             try
             {
-                var response = ColorTypeService.Add(colorType);
+                var response = TransmissionTypeService.Add(transmissionType);
                 ViewBag.Response = response;
                 return View();
             }
@@ -56,23 +56,23 @@ namespace WebApp.Areas.Admin.Controllers
             }
         }
 
-        // GET: ColorTypeController/Edit/5
+        // GET: TransmissionTypeController/Edit/5
         public ActionResult Edit(int id)
         {
-            var item = ColorTypeService.GetById(id);
+            var item = TransmissionTypeService.GetById(id);
             return View(item);
         }
 
-        // POST: ColorTypeController/Edit/5
+        // POST: TransmissionTypeController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, ColorType colorType)
+        public ActionResult Edit(int id, TransmissionType transmissionType)
         {
             try
             {
-                var response = ColorTypeService.Update(colorType);
+                var response = TransmissionTypeService.Update(transmissionType);
                 ViewBag.Response = response;
-                return View(colorType);
+                return View(transmissionType);
             }
             catch
             {
@@ -80,21 +80,21 @@ namespace WebApp.Areas.Admin.Controllers
             }
         }
 
-        // GET: ColorTypeController/Delete/5
+        // GET: TransmissionTypeController/Delete/5
         public ActionResult Delete(int id)
         {
-            var item = ColorTypeService.GetById(id);
-            return View(item);
+            var item = TransmissionTypeService.GetById(id);
+            return View(item); ;
         }
 
-        // POST: ColorTypeController/Delete/5
+        // POST: TransmissionTypeController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
             try
             {
-                ColorTypeService.Delete(id);
+                TransmissionTypeService.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch
