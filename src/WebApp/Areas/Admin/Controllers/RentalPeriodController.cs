@@ -12,41 +12,41 @@ namespace WebApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("admin/[controller]/[action]")]
-    public class FuelTypeController : Controller
+    public class RentalPeriodController : Controller
     {
-        private IFuelTypeService FuelTypeService { get; }
-        public FuelTypeController(IFuelTypeService fuelTypeService)
+        private IRentalPeriodService RentalPeriodService { get; }
+        public RentalPeriodController(IRentalPeriodService rentalPeriodService)
         {
-            FuelTypeService = fuelTypeService;
+            RentalPeriodService = rentalPeriodService;
         }
-        // GET: FuelTypeController
+        // GET: RentalPeriodController
         public ActionResult Index()
         {
-            FuelTypreFilter filter = new FuelTypreFilter();
-            var items = FuelTypeService.Get(filter);
+            RentalPeriodFilter filter = new RentalPeriodFilter();
+            var items = RentalPeriodService.Get(filter);
             return View(items);
         }
 
-        // GET: FuelTypeController/Details/5
+        // GET: RentalPeriodController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: FuelTypeController/Create
+        // GET: RentalPeriodController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: FuelTypeController/Create
+        // POST: RentalPeriodController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(FuelType fuelType)
+        public ActionResult Create(RentalPeriod rentalPeriod)
         {
             try
             {
-                var response = FuelTypeService.Add(fuelType);
+                var response = RentalPeriodService.Add(rentalPeriod);
                 ViewBag.Response = response;
                 return View();
             }
@@ -56,23 +56,23 @@ namespace WebApp.Areas.Admin.Controllers
             }
         }
 
-        // GET: FuelTypeController/Edit/5
+        // GET: RentalPeriodController/Edit/5
         public ActionResult Edit(int id)
         {
-            var item = FuelTypeService.GetById(id);
+            var item = RentalPeriodService.GetById(id);
             return View(item);
         }
 
-        // POST: FuelTypeController/Edit/5
+        // POST: RentalPeriodController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, FuelType fuelType)
+        public ActionResult Edit(int id,RentalPeriod rentalPeriod)
         {
             try
             {
-                var response = FuelTypeService.Update(fuelType);
+                var response = RentalPeriodService.Update(rentalPeriod);
                 ViewBag.Response = response;
-                return View(fuelType);
+                return View(rentalPeriod);
             }
             catch
             {
@@ -80,21 +80,22 @@ namespace WebApp.Areas.Admin.Controllers
             }
         }
 
-        // GET: FuelTypeController/Delete/5
+        // GET: RentalPeriodController/Delete/5
         public ActionResult Delete(int id)
         {
-            var item = FuelTypeService.GetById(id);
+            var item = RentalPeriodService.GetById(id);
             return View(item);
         }
 
-        // POST: FuelTypeController/Delete/5
+        // POST: RentalPeriodController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
+
             try
             {
-                FuelTypeService.Delete(id);
+                RentalPeriodService.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch
