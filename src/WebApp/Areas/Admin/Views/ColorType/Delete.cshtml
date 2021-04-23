@@ -1,0 +1,27 @@
+﻿@model Domain.Entities.ColorType
+
+@{
+    ViewData["Title"] = "Araç Rengi Silme";
+}
+
+<h1>Araç Rengi Silme</h1>
+
+<h3>Etngi silmek istediğinize emin misiniz?</h3>
+<div>
+    <h4>Araç Rengi</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        @Html.HiddenFor(model=>model.Id)
+        <input type="submit" value="Sil" class="btn btn-danger" /> |
+        <a asp-action="Index">Araç Marka Listesi</a>
+    </form>
+</div>
