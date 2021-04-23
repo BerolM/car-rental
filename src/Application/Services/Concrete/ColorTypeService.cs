@@ -44,8 +44,8 @@ namespace Application.Services.Concrete
             var checkResponse = ChechToAddOrUpdate(colorType);
             if (!checkResponse.IsSuccess)
                 return checkResponse;
-            var vehicleBrandToUpdate = GetById(colorType.Id);
-            vehicleBrandToUpdate.Name = colorType.Name;
+            var colorTypeToUpdate = GetById(colorType.Id);
+            colorTypeToUpdate.Name = colorType.Name;
             Context.SaveChanges();
             return Response.Success("Renk başarıyla güncellendi.");
         }

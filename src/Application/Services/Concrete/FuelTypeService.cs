@@ -45,8 +45,8 @@ namespace Application.Services.Concrete
             var checkResponse = ChechToAddOrUpdate(fuelType);
             if (!checkResponse.IsSuccess)
                 return checkResponse;
-            var vehicleBrandToUpdate = GetById(fuelType.Id);
-            vehicleBrandToUpdate.Name = fuelType.Name;
+            var fuelTypeToUpdate = GetById(fuelType.Id);
+            fuelTypeToUpdate.Name = fuelType.Name;
             Context.SaveChanges();
             return Response.Success("Yakıt tipi başarıyla güncellendi.");
         }
