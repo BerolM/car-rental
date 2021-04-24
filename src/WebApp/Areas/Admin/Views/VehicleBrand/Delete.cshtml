@@ -2,13 +2,17 @@
 
 @{
     ViewData["Title"] = "Araç Markasını Silme";
+    Response response = ViewBag.Response;
 }
 
 <h1>Araç Markasını Silme</h1>
 
 <h3>Markayı silmek istediğinize emin misiniz?</h3>
 <div>
-    <h4>Araç Markası</h4>
+@if (response!=null)
+{
+    <message-box is-success="@response.IsSuccess" message="@response.Message"></message-box>
+}
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">

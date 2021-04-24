@@ -95,12 +95,23 @@ namespace WebApp.Areas.Admin.Controllers
         {
             try
             {
-                VehicleBrandService.Delete(id);
-                return RedirectToAction(nameof(Index));
+                var response = VehicleBrandService.Delete(id);
+                if (response.IsSuccess)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    var item = VehicleBrandService.GetById(id);
+                    ViewBag.Response = response;
+                    return View(item);
+                }
             }
             catch
             {
-                return View();
+                ViewBag.Response = Domain.DTOs.Response.Fail("Bir hata oluştu.");
+                var item = VehicleBrandService.GetById(id);
+                return View(item);
             }
         }
     }
