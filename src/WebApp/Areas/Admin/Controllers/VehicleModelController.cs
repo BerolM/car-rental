@@ -1,7 +1,9 @@
 ﻿using Application.Services;
 using Domain.DTOs;
+using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,49 +40,70 @@ namespace WebApp.Areas.Admin.Controllers
         // GET: VehicleModelController/Create
         public ActionResult Create()
         {
+            ViewBag.VehicleBrands = GetVehicleBrands();
             return View();
         }
 
         // POST: VehicleModelController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(VehicleModel vehicleModel)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var response = VehicleModelService.Add(vehicleModel);
+                ViewBag.Response = response;
             }
             catch
             {
-                return View();
+                ViewBag.Response = Domain.DTOs.Response.Fail("Bir hata oluştu");
             }
+            finally
+            {
+                ViewBag.VehicleBrands = GetVehicleBrands(); 
+            }
+            return View();
+        }
+
+        private List<SelectListItem> GetVehicleBrands()
+        {
+            return VehicleBrandService.Get(new VehicleBrandFilter()).Select(b => new SelectListItem(b.Name, b.Id.ToString())).ToList();
         }
 
         // GET: VehicleModelController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var item = VehicleModelService.GetById(id);
+            ViewBag.VehicleBrands = GetVehicleBrands();
+            return View(item);
         }
 
         // POST: VehicleModelController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, VehicleModel vehicleModel)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var response = VehicleModelService.Update(vehicleModel);
+                ViewBag.Response = response;
             }
             catch
             {
-                return View();
+                ViewBag.Response = Domain.DTOs.Response.Fail("Bir hata oluştu");
             }
+            finally
+            {
+                ViewBag.VehicleBrands = GetVehicleBrands();
+            }
+            return View(vehicleModel);
         }
 
         // GET: VehicleModelController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var item = VehicleModelService.GetDetail(id);
+            return View(item);
         }
 
         // POST: VehicleModelController/Delete/5
@@ -90,11 +113,13 @@ namespace WebApp.Areas.Admin.Controllers
         {
             try
             {
+                VehicleModelService.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                var item = VehicleModelService.GetDetail(id);
+                return View(item);
             }
         }
     }

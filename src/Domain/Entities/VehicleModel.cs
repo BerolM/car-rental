@@ -9,9 +9,11 @@ namespace Domain.Entities
 
         [Required]
         [MaxLength(50)]
+        [Display(Name="Adı")]
         public string Name { get; set; }
 
         [Required]
+        [Display(Name = "Araç Markası")]
         public int VehicleBrandId { get; set; }
         public VehicleBrand VehicleBrand { get; set; }
     }

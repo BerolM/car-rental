@@ -1,0 +1,37 @@
+﻿@model Domain.DTOs.VehicleModelDTO
+
+@{
+    ViewData["Title"] = "Araç Modelini Silme";
+    Response response = ViewBag.Response;
+}
+
+<h1>Araç Modelini Silme</h1>
+
+<h3>Araç modelini silmek istediğinizden emin misiniz?</h3>
+@if (response!=null)
+{
+    <message-box is-success="@response.IsSuccess" message="@response.Message"></message-box>
+}
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.VehicleBrandName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.VehicleBrandName)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        @Html.HiddenFor(model=>model.Id)
+        <input type="submit" value="Sil" class="btn btn-danger" /> |
+        <a asp-action="Index">Araç Model Listesi</a>
+    </form>
+</div>
