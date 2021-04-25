@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.DTOs
 {
-    public class FuelTypreFilter
+    public class FuelTypeFilter
     {
         public string Name { get; set; } = "";
     }

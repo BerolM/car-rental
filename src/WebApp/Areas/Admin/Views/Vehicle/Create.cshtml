@@ -1,0 +1,89 @@
+﻿@model Domain.Entities.Vehicle
+
+@{
+    ViewData["Title"] = "Yeni Araç";
+    Response response = ViewBag.Response;
+    List<SelectListItem> vehicleModels = ViewBag.VehicleModels,
+                         vehicleClassTypes = ViewBag.VehicleClassTypes,
+                         colorTypes = ViewBag.ColorTypes,
+                         fuelTypes = ViewBag.FuelTypes,
+                         tireTypes = ViewBag.TireTypes,
+                         transmissionTypes = ViewBag.TransmissionTypes
+                         ;
+}
+
+<h1>Yeni Araç</h1>
+
+<hr />
+@if (response != null)
+{
+    <message-box is-success="@response.IsSuccess" message="@response.Message"></message-box>
+}
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="VehicleModelId" class="control-label"></label>
+                @Html.DropDownListFor(model => model.VehicleModelId, vehicleModels, new { @class = "form-control" })
+                <span asp-validation-for="VehicleModelId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TransmissionTypeId" class="control-label"></label>
+                @Html.DropDownListFor(model => model.TransmissionTypeId, transmissionTypes, new { @class = "form-control" })
+                <span asp-validation-for="TransmissionTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FuelTypeId" class="control-label"></label>
+                @Html.DropDownListFor(model => model.FuelTypeId, fuelTypes, new { @class = "form-control" })
+                <span asp-validation-for="FuelTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VehicleClassTypeId" class="control-label"></label>
+                @Html.DropDownListFor(model => model.VehicleClassTypeId, vehicleClassTypes, new { @class = "form-control" })
+                <span asp-validation-for="VehicleClassTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ColorTypeId" class="control-label"></label>
+                @Html.DropDownListFor(model => model.ColorTypeId, colorTypes, new { @class = "form-control" })
+                <span asp-validation-for="ColorTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TireTypeId" class="control-label"></label>
+                @Html.DropDownListFor(model => model.TireTypeId, tireTypes, new { @class = "form-control" })
+                <span asp-validation-for="TireTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductionYear" class="control-label"></label>
+                <input asp-for="ProductionYear" class="form-control" />
+                <span asp-validation-for="ProductionYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EngineDisplacement" class="control-label"></label>
+                <input asp-for="EngineDisplacement" class="form-control" />
+                <span asp-validation-for="EngineDisplacement" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Horsepower" class="control-label"></label>
+                <input asp-for="Horsepower" class="form-control" />
+                <span asp-validation-for="Horsepower" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Araç Listesi</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

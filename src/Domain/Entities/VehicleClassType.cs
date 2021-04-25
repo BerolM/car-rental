@@ -12,7 +12,7 @@ namespace Domain.Entities
         [Display(Name = "Adı")]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Boş bırakılamaz.")]
         [MaxLength(300)]
         [Display(Name = "Açıklama")]
         public string Description { get; set; }

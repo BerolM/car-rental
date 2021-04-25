@@ -22,7 +22,7 @@ namespace WebApp.Areas.Admin.Controllers
         // GET: FuelTypeController
         public ActionResult Index()
         {
-            FuelTypreFilter filter = new FuelTypreFilter();
+            FuelTypeFilter filter = new FuelTypeFilter();
             var items = FuelTypeService.Get(filter);
             return View(items);
         }
