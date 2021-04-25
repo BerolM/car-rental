@@ -60,7 +60,7 @@ namespace Application.Services.Concrete
             return Response.Success("Yakıt tipi başarıyla silindi.");
         }
 
-        public List<FuelType> Get(FuelTypreFilter filter)
+        public List<FuelType> Get(FuelTypeFilter filter)
         {
             var items = (from v in Context.FuelType
                          where v.Name.StartsWith(filter.Name)

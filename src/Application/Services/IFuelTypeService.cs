@@ -14,7 +14,7 @@ namespace Application.Services
         Response Update(FuelType fuelType);
         Response Delete(int id);
         FuelType GetById(int id);
-        List<FuelType> Get(FuelTypreFilter filter);
+        List<FuelType> Get(FuelTypeFilter filter);
 
     }
 }
