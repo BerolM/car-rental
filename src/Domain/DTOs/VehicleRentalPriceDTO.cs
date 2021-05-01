@@ -1,38 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 
-namespace Domain.Entities
+namespace Domain.DTOs
 {
-    public class VehicleRentalPrice
+    public class VehicleRentalPriceDTO
     {
-        [Key]
         public int Id { get; set; }
-
-        [Required]
-        [Display(Name ="Araç")]
         public int VehicleId { get; set; }
-
-        [Required]
-        [Display(Name = "Kiralama Periyodu")]
+        public string VehicleBrandName { get; set; }
+        public string VehicleModelName { get; set; }
         public int RentalPeriodId { get; set; }
 
-        [Required]
+        [Display(Name ="Kiralama Periyodu")]
+        public string RentalPeriodName { get; set; }
+
         [Display(Name = "Fiyat")]
         public decimal Price { get; set; }
 
-        [Required]
         [Display(Name = "Başlangıç Tarihi")]
         public DateTime StartDate { get; set; }
 
-        [Required]
         [Display(Name = "Bitiş Tarihi")]
         public DateTime EndDate { get; set; }
-
-        public Vehicle Vehicle { get; set; }
-        public RentalPeriod RentalPeriod { get; set; }
     }
 }

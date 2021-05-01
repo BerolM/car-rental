@@ -1,13 +1,13 @@
 ﻿@model Domain.Entities.RentalPeriod
 
 @{
-    ViewData["Title"] = "Araç Kiralama Süresi Düzenleme";
+    ViewData["Title"] = "Kiralama Periyodu Düzenleme";
     Response response = ViewBag.Response;
 }
 
-<h1>Araç Kiralama Süresi Düzenleme</h1>
+<h1>Kiralama Periyodu Düzenleme</h1>
 
-<h4>Araç Kiralama Süresi</h4>
+<h4>Kiralama Periyodu</h4>
 <hr />
 @if (response != null)
 {
@@ -31,7 +31,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Araç Marka Listesi</a>
+    <a asp-action="Index">Kiralama Periyodu Listesi</a>
 </div>
 
 @section Scripts {

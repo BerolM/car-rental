@@ -1,27 +1,32 @@
 ﻿@model Domain.Entities.TransmissionType
 
 @{
-    ViewData["Title"] = "Araç Vites Tipi Silme";
+    ViewData["Title"] = "Şanzıman Türü Silme";
+    Response response = ViewBag.Response;
 }
 
-<h1>Araç Vites Tipi Silme</h1>
+<h1>Şanzıman Türü Silme</h1>
 
-<h3>Vites tipini silmek istediğinize emin misiniz?</h3>
+<h3>Şanzıman türünü silmek istediğinize emin misiniz?</h3>
+@if (response != null)
+{
+    <message-box is-success="@response.IsSuccess" message="@response.Message"></message-box>
+}
 <div>
-    <h4>Araç Vites Tipi</h4>
+    <h4>Şanzıman Türü</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
     </dl>
-    
+
     <form asp-action="Delete">
         @Html.HiddenFor(model => model.Id)
         <input type="submit" value="Sil" class="btn btn-danger" /> |
-        <a asp-action="Index">raç Marka Listesi</a>
+        <a asp-action="Index">Şanzıman Türü Listesi</a>
     </form>
 </div>

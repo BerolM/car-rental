@@ -2,11 +2,8 @@
 using Application.Services.Commons;
 using Domain.DTOs;
 using Domain.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Services.Concrete
 {
@@ -16,6 +13,7 @@ namespace Application.Services.Concrete
         {
 
         }
+
         public Response Add(VehicleClassType vehicleClassType)
         {
             var checkResponse = ChechToAddOrUpdate(vehicleClassType);
@@ -35,7 +33,7 @@ namespace Application.Services.Concrete
                                           ).Count();
             if (sameNumberOfRecords > 0)
             {
-                return Response.Fail($"{vehicleClassType.Name} sınıfı sistemde zaten kayıtlıdır.");
+                return Response.Fail($"{vehicleClassType.Name} araç sınıfı sistemde zaten kayıtlıdır.");
             }
             else
                return Response.Success();
@@ -46,10 +44,12 @@ namespace Application.Services.Concrete
             var checkResponse = ChechToAddOrUpdate(vehicleClassType);
             if (!checkResponse.IsSuccess)
                 return checkResponse;
+
             var vehicleClassTypeToUpdate = GetById(vehicleClassType.Id);
             vehicleClassTypeToUpdate.Name = vehicleClassType.Name;
             vehicleClassTypeToUpdate.Description = vehicleClassType.Description;
             Context.SaveChanges();
+
             return Response.Success("Araç sınıfı başarıyla güncellendi.");
         }
 

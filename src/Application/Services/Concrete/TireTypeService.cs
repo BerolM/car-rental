@@ -2,11 +2,8 @@
 using Application.Services.Commons;
 using Domain.DTOs;
 using Domain.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Services.Concrete
 {
@@ -24,7 +21,8 @@ namespace Application.Services.Concrete
 
             Context.TireType.Add(tireType);
             Context.SaveChanges();
-            return Response.Success("Lastik tipi başarıyla kaydedildi");
+
+            return Response.Success("Lastik türü başarıyla kaydedildi");
         }
         private Response ChechToAddOrUpdate(TireType tireType)
         {
@@ -34,7 +32,7 @@ namespace Application.Services.Concrete
                                           ).Count();
             if (sameNumberOfRecords > 0)
             {
-                return Response.Fail($"{tireType.Name} lastik tipi sistemde zaten kayıtlıdır.");
+                return Response.Fail($"{tireType.Name} lastik türü sistemde zaten kayıtlıdır.");
             }
             return Response.Success();
 
@@ -44,10 +42,12 @@ namespace Application.Services.Concrete
             var checkResponse = ChechToAddOrUpdate(tireType);
             if (!checkResponse.IsSuccess)
                 return checkResponse;
+
             var tireTypeToUpdate = GetById(tireType.Id);
             tireTypeToUpdate.Name = tireType.Name;
             Context.SaveChanges();
-            return Response.Success("Lastik tipi başarıyla güncellendi.");
+
+            return Response.Success("Lastik türü başarıyla güncellendi.");
         }
 
         public Response Delete(int id)

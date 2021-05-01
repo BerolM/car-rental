@@ -3,10 +3,6 @@ using Domain.DTOs;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebApp.Areas.Admin.Controllers
 {
@@ -15,22 +11,18 @@ namespace WebApp.Areas.Admin.Controllers
     public class ColorTypeController : Controller
     {
         private IColorTypeService ColorTypeService { get; }
+
         public ColorTypeController(IColorTypeService colorTypeService)
         {
             ColorTypeService = colorTypeService;
         }
+
         // GET: ColorTypeController
         public ActionResult Index()
         {
             ColorTypeFilter filter = new ColorTypeFilter();
             var items = ColorTypeService.Get(filter);
             return View(items);
-        }
-
-        // GET: ColorTypeController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
         }
 
         // GET: ColorTypeController/Create

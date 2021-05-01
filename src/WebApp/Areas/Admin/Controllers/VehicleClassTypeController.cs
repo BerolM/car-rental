@@ -3,10 +3,6 @@ using Domain.DTOs;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebApp.Areas.Admin.Controllers
 {
@@ -15,22 +11,18 @@ namespace WebApp.Areas.Admin.Controllers
     public class VehicleClassTypeController : Controller
     {
         private IVehicleClassTypeService VehicleClassTypeService { get; }
+        
         public VehicleClassTypeController(IVehicleClassTypeService vehicleClassTypeService)
         {
             VehicleClassTypeService = vehicleClassTypeService;
         }
+
         // GET: VehicleClassTypeController
         public ActionResult Index()
         {
             VehicleClassTypeFilter filter = new VehicleClassTypeFilter();
             var items = VehicleClassTypeService.Get(filter);
             return View(items);
-        }
-
-        // GET: VehicleClassTypeController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
         }
 
         // GET: VehicleClassTypeController/Create

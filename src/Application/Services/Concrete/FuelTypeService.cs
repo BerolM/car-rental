@@ -1,12 +1,9 @@
-﻿using Application.Services.Commons;
-using Application.Infrastructure.Persistence;
+﻿using Application.Infrastructure.Persistence;
+using Application.Services.Commons;
 using Domain.DTOs;
 using Domain.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace Application.Services.Concrete
@@ -25,6 +22,7 @@ namespace Application.Services.Concrete
 
             Context.FuelType.Add(fuelType);
             Context.SaveChanges();
+
             return Response.Success("Yakıt tipi başarıyla kaydedildi");
         }
         private Response ChechToAddOrUpdate(FuelType fuelType)
@@ -35,7 +33,7 @@ namespace Application.Services.Concrete
                                           ).Count();
             if (sameNumberOfRecords > 0)
             {
-                return Response.Fail($"{fuelType.Name} yakıt tipi sistemde zaten kayıtlıdır.");
+                return Response.Fail($"{fuelType.Name} yakıt türü sistemde zaten kayıtlıdır.");
             }
             return Response.Success();
 
@@ -45,19 +43,20 @@ namespace Application.Services.Concrete
             var checkResponse = ChechToAddOrUpdate(fuelType);
             if (!checkResponse.IsSuccess)
                 return checkResponse;
+
             var fuelTypeToUpdate = GetById(fuelType.Id);
             fuelTypeToUpdate.Name = fuelType.Name;
             Context.SaveChanges();
-            return Response.Success("Yakıt tipi başarıyla güncellendi.");
-        }
 
+            return Response.Success("Yakıt türü başarıyla güncellendi.");
+        }
         public Response Delete(int id)
         {
             var fuelTypeToDelete = GetById(id);
             Context.FuelType.Remove(fuelTypeToDelete);
             Context.SaveChanges();
 
-            return Response.Success("Yakıt tipi başarıyla silindi.");
+            return Response.Success("Yakıt türü başarıyla silindi.");
         }
 
         public List<FuelType> Get(FuelTypeFilter filter)
