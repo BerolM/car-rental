@@ -15,6 +15,7 @@ namespace Domain.Entities
         [Required]
         [Display(Name = "Araç Markası")]
         public int VehicleBrandId { get; set; }
+
         public VehicleBrand VehicleBrand { get; set; }
     }
 }

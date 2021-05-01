@@ -2,11 +2,8 @@
 using Application.Services.Commons;
 using Domain.DTOs;
 using Domain.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Services.Concrete
 {
@@ -16,6 +13,7 @@ namespace Application.Services.Concrete
         {
 
         }
+
         public Response Add(TransmissionType transmissionType)
         {
             var chechResponse = ChechToAddOrUpdate(transmissionType);
@@ -24,7 +22,8 @@ namespace Application.Services.Concrete
 
             Context.TransmissionType.Add(transmissionType);
             Context.SaveChanges();
-            return Response.Success("Vites tipi başarıyla kaydedildi");
+
+            return Response.Success("Şanzıman türü başarıyla kaydedildi");
         }
         private Response ChechToAddOrUpdate(TransmissionType transmissionType)
         {
@@ -34,7 +33,7 @@ namespace Application.Services.Concrete
                                           ).Count();
             if (sameNumberOfRecords > 0)
             {
-                return Response.Fail($"{transmissionType.Name} vites tipi sistemde zaten kayıtlıdır.");
+                return Response.Fail($"{transmissionType.Name} şanzıman türü sistemde zaten kayıtlıdır.");
             }
             return Response.Success();
 
@@ -44,10 +43,12 @@ namespace Application.Services.Concrete
             var checkResponse = ChechToAddOrUpdate(transmissionType);
             if (!checkResponse.IsSuccess)
                 return checkResponse;
+
             var transmissionTypeToUpdate = GetById(transmissionType.Id);
             transmissionTypeToUpdate.Name = transmissionType.Name;
             Context.SaveChanges();
-            return Response.Success("Vites tipi başarıyla güncellendi.");
+
+            return Response.Success("Şanzıman türü başarıyla güncellendi.");
         }
         public Response Delete(int id)
         {
@@ -55,7 +56,7 @@ namespace Application.Services.Concrete
             Context.TransmissionType.Remove(transmissionTypeToDelete);
             Context.SaveChanges();
 
-            return Response.Success("Vites tipi başarıyla silindi.");
+            return Response.Success("Şanzıman türü başarıyla silindi.");
         }
 
         public List<TransmissionType> Get(TransmissionTypeFilter filter)

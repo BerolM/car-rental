@@ -3,10 +3,6 @@ using Domain.DTOs;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebApp.Areas.Admin.Controllers
 {
@@ -15,22 +11,18 @@ namespace WebApp.Areas.Admin.Controllers
     public class TireTypeController : Controller
     {
         private ITireTypeService TireTypeService { get; }
+
         public TireTypeController(ITireTypeService tireTypeService)
         {
             TireTypeService = tireTypeService;
         }
+
         // GET: TireTypeController
         public ActionResult Index()
         {
             TireTypeFilter filter = new TireTypeFilter();
             var items = TireTypeService.Get(filter);
             return View(items);
-        }
-
-        // GET: TireTypeController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
         }
 
         // GET: TireTypeController/Create

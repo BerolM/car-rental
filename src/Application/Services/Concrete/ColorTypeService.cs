@@ -1,12 +1,9 @@
-﻿using Application.Services.Commons;
-using Application.Infrastructure.Persistence;
+﻿using Application.Infrastructure.Persistence;
+using Application.Services.Commons;
 using Domain.DTOs;
 using Domain.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Services.Concrete
 {
@@ -34,7 +31,7 @@ namespace Application.Services.Concrete
                                           ).Count();
             if (sameNumberOfRecords > 0)
             {
-                return Response.Fail($"{colorType.Name} rengi sistemde zaten kayıtlıdır.");
+                return Response.Fail($"{colorType.Name} renk sistemde zaten kayıtlıdır.");
             }
             return Response.Success();
 
@@ -44,6 +41,7 @@ namespace Application.Services.Concrete
             var checkResponse = ChechToAddOrUpdate(colorType);
             if (!checkResponse.IsSuccess)
                 return checkResponse;
+
             var colorTypeToUpdate = GetById(colorType.Id);
             colorTypeToUpdate.Name = colorType.Name;
             Context.SaveChanges();

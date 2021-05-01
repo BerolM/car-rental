@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Domain.DTOs.VehicleRentalPriceDTO>
+
+@{
+    string vehicleName = ViewBag.VehicleName;
+    int vehicleId = ViewBag.VehicleId;
+
+    ViewData["Title"] = "Araç Kiralama Fiyat Listesi | " + vehicleName;
+}
+
+<h1>Araç Kiralama Fiyat Listesi | @vehicleName</h1>
+
+<p>
+    @Html.ActionLink("Yeni Fiyat", "Create", new { vehicleId = vehicleId })
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RentalPeriodName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RentalPeriodName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Düzenle", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Sil", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-action="Index" asp-controller="Vehicle">Araç Listesi</a>
+</div>

@@ -46,17 +46,21 @@ namespace Application.Services.Concrete
             var checkResponse = ChechToAddOrUpdate(vehicleBrand);
             if (!checkResponse.IsSuccess)
                 return checkResponse;
+
             var vehicleBrandToUpdate = GetById(vehicleBrand.Id);
             vehicleBrandToUpdate.Name = vehicleBrand.Name;
             Context.SaveChanges();
+
             return Response.Success("Marka başarıyla güncellendi.");
         }
         public Response Delete(int id)
         {
             var vehicleBrandToDelete = GetById(id);
+
             var checkResponse = CheckToDelete(vehicleBrandToDelete);
             if (!checkResponse.IsSuccess)
                 return checkResponse;
+
             Context.VehicleBrand.Remove(vehicleBrandToDelete);
             Context.SaveChanges();
 

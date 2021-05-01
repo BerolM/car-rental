@@ -1,13 +1,13 @@
 ﻿@model Domain.Entities.FuelType
 
 @{
-    ViewData["Title"] = "Araç Yakıt Tipi Düzenleme";
+    ViewData["Title"] = "Yakıt Türü Düzenleme";
     Response response = ViewBag.Response;
 }
 
-<h1>Araç Yakıt Tipi Düzenleme</h1>
+<h1>Yakıt Türü Düzenleme</h1>
 
-<h4>Araç Yakıt Tipi</h4>
+<h4>Yakıt Türü</h4>
 <hr />
 @if (response != null)
 {
@@ -31,7 +31,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Araç Marka Listesi</a>
+    <a asp-action="Index">Yakıt Türü Listesi</a>
 </div>
 
 @section Scripts {

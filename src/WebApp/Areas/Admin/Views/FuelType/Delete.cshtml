@@ -1,27 +1,33 @@
 ﻿@model Domain.Entities.FuelType
 
 @{
-    ViewData["Title"] = "Araç Yakıt Tipi Silme";
+    ViewData["Title"] = "Yakıt Türü Silme";
+    Response response = ViewBag.Response;
 }
 
-<h1>Araç Yakıt Tipi Silme</h1>
+<h1>Yakıt Türü Silme</h1>
 
-<h3>Yakıt tipini silmek istediğinize emin misiniz?</h3>
+<h3>Yakıt türünü silmek istediğinize emin misiniz?</h3>
+@if (response != null)
+{
+    <message-box is-success="@response.IsSuccess" message="@response.Message"></message-box>
+}
 <div>
-    <h4>Araç Yalıt Tipi</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        @Html.HiddenFor(model => model.Id)
-        <input type="submit" value="Sil" class="btn btn-danger" /> |
-        <a asp-action="Index">Araç Marka Listesi</a>
-    </form>
-</div>
+    <div>
+        <h4>Yakıt Türü</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            @Html.HiddenFor(model => model.Id)
+            <input type="submit" value="Sil" class="btn btn-danger" /> |
+            <a asp-action="Index">Yakıt Türü Listesi</a>
+        </form>
+    </div>

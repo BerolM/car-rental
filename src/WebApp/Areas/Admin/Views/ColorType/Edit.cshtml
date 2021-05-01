@@ -1,13 +1,13 @@
 ﻿@model Domain.Entities.ColorType
 
 @{
-    ViewData["Title"] = "Araç Renk Düzenleme";
+    ViewData["Title"] = "Renk Düzenleme";
     Response response = ViewBag.Response;
 }
 
-<h1>Araç Renk Düzenleme</h1>
+<h1>Renk Düzenleme</h1>
 
-<h4>Araç Rengi</h4>
+<h4>Renk</h4>
 <hr />
 @if (response != null)
 {
@@ -31,7 +31,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Araç Marka Listesi</a>
+    <a asp-action="Index">Renk Listesi</a>
 </div>
 
 @section Scripts {

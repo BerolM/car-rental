@@ -3,10 +3,6 @@ using Domain.DTOs;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebApp.Areas.Admin.Controllers
 {
@@ -15,22 +11,18 @@ namespace WebApp.Areas.Admin.Controllers
     public class RentalPeriodController : Controller
     {
         private IRentalPeriodService RentalPeriodService { get; }
+
         public RentalPeriodController(IRentalPeriodService rentalPeriodService)
         {
             RentalPeriodService = rentalPeriodService;
         }
+
         // GET: RentalPeriodController
         public ActionResult Index()
         {
             RentalPeriodFilter filter = new RentalPeriodFilter();
             var items = RentalPeriodService.Get(filter);
             return View(items);
-        }
-
-        // GET: RentalPeriodController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
         }
 
         // GET: RentalPeriodController/Create
@@ -66,7 +58,7 @@ namespace WebApp.Areas.Admin.Controllers
         // POST: RentalPeriodController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id,RentalPeriod rentalPeriod)
+        public ActionResult Edit(int id, RentalPeriod rentalPeriod)
         {
             try
             {
@@ -92,7 +84,6 @@ namespace WebApp.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
-
             try
             {
                 RentalPeriodService.Delete(id);

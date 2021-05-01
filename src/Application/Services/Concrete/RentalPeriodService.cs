@@ -2,11 +2,8 @@
 using Application.Services.Commons;
 using Domain.DTOs;
 using Domain.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Services.Concrete
 {
@@ -16,6 +13,7 @@ namespace Application.Services.Concrete
         {
 
         }
+
         public Response Add(RentalPeriod rentalPeriod)
         {
             var chechResponse = ChechToAddOrUpdate(rentalPeriod);
@@ -24,7 +22,8 @@ namespace Application.Services.Concrete
 
             Context.RentalPeriod.Add(rentalPeriod);
             Context.SaveChanges();
-            return Response.Success("Kiralama süresi başarıyla kaydedildi");
+
+            return Response.Success("Kiralama periyodu başarıyla kaydedildi");
         }
         private Response ChechToAddOrUpdate(RentalPeriod rentalPeriod)
         {
@@ -34,7 +33,7 @@ namespace Application.Services.Concrete
                                           ).Count();
             if (sameNumberOfRecords > 0)
             {
-                return Response.Fail($"{rentalPeriod.Name} kiralama süresi sistemde zaten kayıtlıdır.");
+                return Response.Fail($"{rentalPeriod.Name} kiralama periyodu sistemde zaten kayıtlıdır.");
             }
             return Response.Success();
 
@@ -44,9 +43,11 @@ namespace Application.Services.Concrete
             var checkResponse = ChechToAddOrUpdate(rentalPeriod);
             if (!checkResponse.IsSuccess)
                 return checkResponse;
+
             var rentalPeriodToUpdate = GetById(rentalPeriod.Id);
             rentalPeriodToUpdate.Name = rentalPeriod.Name;
             Context.SaveChanges();
+
             return Response.Success("Kiralama süresi başarıyla güncellendi.");
         }
 
@@ -56,7 +57,7 @@ namespace Application.Services.Concrete
             Context.RentalPeriod.Remove(rentalPeriodToDelete);
             Context.SaveChanges();
 
-            return Response.Success("Yakıt tipi başarıyla silindi.");
+            return Response.Success("Kiralama periyodu başarıyla silindi.");
         }
 
         public List<RentalPeriod> Get(RentalPeriodFilter filter)

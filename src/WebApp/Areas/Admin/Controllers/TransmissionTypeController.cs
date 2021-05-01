@@ -3,10 +3,6 @@ using Domain.DTOs;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebApp.Areas.Admin.Controllers
 {
@@ -15,6 +11,7 @@ namespace WebApp.Areas.Admin.Controllers
     public class TransmissionTypeController : Controller
     {
         private ITransmissionTypeService TransmissionTypeService { get; }
+
         public TransmissionTypeController(ITransmissionTypeService transmissionTypeService)
         {
             TransmissionTypeService = transmissionTypeService;
@@ -25,12 +22,6 @@ namespace WebApp.Areas.Admin.Controllers
             TransmissionTypeFilter filter = new TransmissionTypeFilter();
             var items = TransmissionTypeService.Get(filter);
             return View(items);
-        }
-
-        // GET: TransmissionTypeController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
         }
 
         // GET: TransmissionTypeController/Create
