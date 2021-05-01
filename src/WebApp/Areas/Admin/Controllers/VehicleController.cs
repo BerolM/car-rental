@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApp.Areas.Admin.Models;
 
 namespace WebApp.Areas.Admin.Controllers
 {
@@ -17,7 +18,6 @@ namespace WebApp.Areas.Admin.Controllers
     public class VehicleController : Controller
     {
         private IVehicleService VehicleService { get; }
-        private IVehicleBrandService VehicleBrandService { get; }
         private IVehicleModelService VehicleModelService { get; }
         private IColorTypeService ColorTypeService { get; }
         private IFuelTypeService FuelTypeService { get; }
@@ -26,7 +26,6 @@ namespace WebApp.Areas.Admin.Controllers
         private IVehicleClassTypeService VehicleClassTypeService { get; }
 
         public VehicleController(IVehicleService vehicleService,
-                                 IVehicleBrandService vehicleBrandService,
                                  IVehicleModelService vehicleModelService,
                                  IVehicleClassTypeService vehicleClassTypeService,
                                  IColorTypeService colorTypeService,
@@ -36,7 +35,6 @@ namespace WebApp.Areas.Admin.Controllers
                                  )
         {
             VehicleService = vehicleService;
-            VehicleBrandService = vehicleBrandService;
             VehicleModelService = vehicleModelService;
             VehicleClassTypeService = vehicleClassTypeService;
             ColorTypeService = colorTypeService;
@@ -49,7 +47,22 @@ namespace WebApp.Areas.Admin.Controllers
         {
             VehicleFilter filter = new VehicleFilter();
             var items = VehicleService.Get(filter);
-            return View(items);
+
+            VehicleViewModel model = new VehicleViewModel();
+            model.Filter = filter;
+            model.Vehicles = items;
+            SetParametersToViewBag();
+            return View(model);
+        }
+
+        //POST:VehicleController
+        [HttpPost]
+        public ActionResult Index(VehicleViewModel model)
+        {
+            var items = VehicleService.Get(model.Filter);
+            model.Vehicles = items;
+            SetParametersToViewBag();
+            return View(model);
         }
 
         // GET: VehicleController/Details/5

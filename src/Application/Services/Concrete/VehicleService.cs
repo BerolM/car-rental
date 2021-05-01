@@ -55,16 +55,32 @@ namespace Application.Services.Concrete
                                                   .Include(x => x.TireType)
                                                   .Include(x => x.TransmissionType)
                                                   .Include(x => x.VehicleModel.VehicleBrand)
-                         where 1 == 1
-                            && (filter.VehicleBrandId.HasValue ? v.VehicleModel.VehicleBrandId == filter.VehicleBrandId.Value : true)
-                            && (filter.VehicleModelId.HasValue ? v.VehicleModelId == filter.VehicleModelId.Value : true)
-                            && (filter.TransmissionTypeIds.Count > 0 ? filter.TransmissionTypeIds.Contains(v.TransmissionTypeId) : true)
-                            && (filter.FuelTypeIds.Count > 0 ? filter.FuelTypeIds.Contains(v.FuelTypeId) : true)
-                            && (filter.VehicleClassTypeIds.Count > 0 ? filter.VehicleClassTypeIds.Contains(v.VehicleClassTypeId) : true)
-                            && (filter.ColorTypeIds.Count > 0 ? filter.ColorTypeIds.Contains(v.ColorTypeId) : true)
-                            && (filter.ProductionYearRange != null ? v.ProductionYear >= filter.ProductionYearRange.Start && v.ProductionYear <= filter.ProductionYearRange.End : true)
-                            && (filter.EngineDisplacementRange != null ? v.EngineDisplacement >= filter.EngineDisplacementRange.Start && v.EngineDisplacement <= filter.EngineDisplacementRange.End : true)
-                            && (filter.HorsepowerRange != null ? v.Horsepower >= filter.HorsepowerRange.Start && v.Horsepower <= filter.HorsepowerRange.End : true)
+                         where 1==1
+                           && (filter.VehicleModelId > 0 ? v.VehicleModelId == filter.VehicleModelId:true )
+                           && (filter.TransmissionTypeId > 0 ? v.TransmissionTypeId == filter.TransmissionTypeId: true)
+                           && (filter.FuelTypeId > 0 ? v.FuelTypeId == filter.FuelTypeId : true)
+                           && (filter.VehicleClassTypeId > 0 ? v.VehicleClassTypeId == filter.VehicleClassTypeId : true)
+                           && (filter.ColorTypeId > 0 ? v.ColorTypeId == filter.ColorTypeId : true)
+                           && (filter.TireTypeId > 0 ? v.ColorTypeId == filter.TireTypeId : true)
+                           &&
+                           (
+                                (filter.ProductionYearRange.Start.HasValue ? v.ProductionYear >= filter.ProductionYearRange.Start.Value : true)
+                                &&
+                                (filter.ProductionYearRange.End.HasValue ? v.ProductionYear <= filter.ProductionYearRange.End.Value : true)
+                           )
+                          &&
+                          (
+                            (filter.EngineDisplacementRange.Start.HasValue ? v.EngineDisplacement >= filter.EngineDisplacementRange.Start.Value : true)
+                            &&
+                            (filter.EngineDisplacementRange.End.HasValue ? v.EngineDisplacement <= filter.EngineDisplacementRange.Start.Value : true)
+                          )
+                          &&
+                          (
+                            (filter.HorsepowerRange.Start.HasValue ? v.Horsepower >= filter.HorsepowerRange.Start.Value : true)
+                            &&
+                            (filter.HorsepowerRange.End.HasValue ? v.Horsepower <= filter.HorsepowerRange.End.Value : true)
+                          )
+
                          select new VehicleDTO
                          {
                              ColorTypeId = v.ColorTypeId,
