@@ -1,5 +1,6 @@
 ﻿using Domain.DTOs;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApp.Areas.Admin.Models
 {

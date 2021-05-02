@@ -1,0 +1,30 @@
+﻿@model Domain.Entities.VehicleImage
+@{
+    string vehicleName = ViewBag.VehicleName;
+    ViewData["Title"] = "Araç Resmini Silme | " + vehicleName;
+    Response response = ViewBag.Response;
+}
+
+<h1>Araç Resmini Silme | @vehicleName</h1>
+<h3>Resmi silmek istediğinize emin misiniz?</h3>
+@if (response != null)
+{
+    <message-box is-success="@response.IsSuccess" message="@response.Message"></message-box>
+}
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ImageUrl)
+        </dt>
+        <dd class="col-sm-10">
+            <img src="/@Model.ImageUrl" width="200" class="img-thumbnail rounded" />
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        @Html.HiddenFor(model => model.Id)
+        <input type="submit" value="Sil" class="btn btn-danger" /> |
+        @Html.ActionLink("Resimler", "Index", new { vehicleId = Model.VehicleId })
+    </form>
+</div>
