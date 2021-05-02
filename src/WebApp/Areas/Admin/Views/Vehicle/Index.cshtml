@@ -115,6 +115,7 @@
                 </td>
                 <td>
                     @Html.ActionLink("Fiyatlar", "Index", "VehicleRentalPrice", new { vehicleId = item.Id })|
+                    @Html.ActionLink("Resimler", "Index", "VehicleImage", new { vehicleId = item.Id })|
                     @Html.ActionLink("Düzenle", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Detay", "Details", new { id = item.Id }) |
                     @Html.ActionLink("Sil", "Delete", new { id = item.Id })

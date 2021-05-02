@@ -12,6 +12,7 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="wwwroot\img\cars\" />
   </ItemGroup>
 
   <ItemGroup>

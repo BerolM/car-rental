@@ -110,7 +110,7 @@ namespace Application.Services.Concrete
         public VehicleRentalPriceDTO GetDetail(int id)
         {
             var item = (from p in Context.VehicleRentalPrice.Include(x => x.Vehicle.VehicleModel.VehicleBrand)
-                                                             .Include(x => x.RentalPeriod)
+                                                              .Include(x => x.RentalPeriod)
                         where p.Id == id
                         select new VehicleRentalPriceDTO
                         {

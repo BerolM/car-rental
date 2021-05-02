@@ -1,0 +1,47 @@
+﻿@model WebApp.Areas.Admin.Models.VehicleImageViewModel
+
+@{
+    string vehicleName = ViewBag.VehicleName;
+    ViewData["Title"] = "Yeni Araç Resmi | " + vehicleName;
+    Response response = ViewBag.Response;
+}
+
+<h1>Yeni Araç Resmi | @vehicleName</h1>
+
+<hr />
+@if (response != null)
+{
+    <message-box is-success="@response.IsSuccess" message="@response.Message"></message-box>
+}
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="VehicleId" class="control-label"></label>
+                @Html.HiddenFor(model => model.VehicleId)
+                <input type="text" disabled="disabled" value="@vehicleName" class="form-control" />
+                <span asp-validation-for="VehicleId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                <div class="custom-file">
+                    <input type="file" id="@Html.IdFor(model => model.Image)" name="@Html.NameFor(model => model.Image)" class="custom-file-input" />
+                    <label class="custom-file-label" for="@Html.IdFor(model => model.Image)">Resim seçiniz</label>
+                </div>
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Resimler", "Index", new { vehicleId = Model.VehicleId })
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

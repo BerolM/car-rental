@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Domain.Entities.VehicleImage>
+
+@{
+    string vehicleName = ViewBag.VehicleName;
+    int vehicleId = ViewBag.VehicleId;
+    ViewData["Title"] = "Araç Resimleri | " + vehicleName;
+}
+
+<h1>Araç Resimleri | @vehicleName</h1>
+
+<p>
+    @Html.ActionLink("Yeni Resim", "Create", new { vehicleId = vehicleId })
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageUrl)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="/@item.ImageUrl" width="200" class="img-thumbnail rounded" />
+                </td>
+                <td>
+                    @Html.ActionLink("Sil", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-action="Index" asp-controller="Vehicle">Araç Listesi</a>
+</div>

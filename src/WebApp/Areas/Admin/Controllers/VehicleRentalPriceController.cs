@@ -118,7 +118,9 @@ namespace WebApp.Areas.Admin.Controllers
         public ActionResult Delete(int id)
         {
             var item = VehicleRentalPriceService.GetDetail(id);
+            SetVehicleToViewBag(item.VehicleId);
             return View(item);
+
         }
 
         // POST: VehicleRentalPriceController/Delete/5
@@ -126,16 +128,25 @@ namespace WebApp.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
+            var item = VehicleRentalPriceService.GetById(id);
             try
             {
-                VehicleRentalPriceService.Delete(id);
-                return RedirectToAction(nameof(Index));
+                var response = VehicleRentalPriceService.Delete(id);
+                if (response.IsSuccess)
+                    return RedirectToAction(nameof(Index), new { vehilceId = item.VehicleId });
+                else
+                    ViewBag.Response = response;
             }
             catch
             {
-                var item = VehicleRentalPriceService.GetDetail(id);
-                return View(item);
+                ViewBag.Response = Domain.DTOs.Response.Fail("Bir hata oluştu");
             }
+            finally
+            {
+                SetVehicleToViewBag(item.VehicleId);
+            }
+            return View(item);
+
         }
     }
 }
