@@ -45,7 +45,7 @@
             <button type="submit" class="btn btn-primary">Ara</button>
         </form>
     </div>
-</div>
+
     <div class="col-9">
         <div class="row">
             @foreach (var vehicle in vehicles)
@@ -57,15 +57,15 @@
                             <h3 class="mb-0">@vehicle.VehicleModelName</h3>
                             <div class="mb-1 text-muted">Vites: @vehicle.TransmissionTypeName</div>
                             <div class="mb-1 text-muted">Yakıt: @vehicle.FuelTypeName</div>
-                            <h2>@vehicle.Price.ToString("C",System.Globalization.CultureInfo.CurrentCulture)</h2>
+                            <h2>@vehicle.Price.ToString("C", System.Globalization.CultureInfo.CurrentCulture)</h2>
                             @Html.ActionLink("Araç Detayı", "Detail", new { id = vehicle.Id })
                         </div>
                         <div class="col-auto d-none d-lg-block">
-                            <img src="/@(!string.IsNullOrEmpty(vehicle.ImageUrl)? vehicle.ImageUrl : "img/cars/no-image.jpg")" width="200" class="img-thumbnail"/>
+                            <img src="/@(!string.IsNullOrEmpty(vehicle.ImageUrl)? vehicle.ImageUrl : "img/cars/no-image.jpg")" width="200" class="img-thumbnail" />
                         </div>
                     </div>
                 </div>
-            } 
+            }
+        </div>
     </div>
 </div>
-
