@@ -11,5 +11,7 @@ namespace Domain.Entities
 
         [Display(Name = "Resim")]
         public string ImageUrl { get; set; }
+
+        public Vehicle Vehicle { get; set; }
     }
 }
