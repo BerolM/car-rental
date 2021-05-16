@@ -58,6 +58,8 @@ namespace Domain.Entities
         public TireType TireType { get; set; }
         public VehicleClassType VehicleClassType { get; set; }
         public ColorType ColorType { get; set; }
+        public ICollection<VehicleImage> VehicleImage { get; set; }
+        public ICollection<VehicleRentalPrice> VehicleRentalPrices { get; set; }
 
     }
 }

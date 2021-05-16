@@ -3,6 +3,7 @@ using Application.Services.Commons;
 using Domain.DTOs;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -144,5 +145,53 @@ namespace Application.Services.Concrete
                         }).SingleOrDefault();
             return item;
         }
-     }
+
+        public List<VehicleListItemDTO> GetListItems(VehicleFilter filter)
+        {
+            var items = (from v in Context.Vehicle.Include(x => x.FuelType)
+                                                  .Include(x => x.TransmissionType)
+                                                  .Include(x => x.VehicleModel.VehicleBrand)
+                                                  .Include(x => x.VehicleImage)
+                                                  .Include(x => x.VehicleRentalPrices)
+                         where 1 == 1
+                           && v.VehicleRentalPrices.Count(p => p.StartDate <= DateTime.Today && p.EndDate >= DateTime.Today) > 0
+                           && (filter.VehicleModelId > 0 ? v.VehicleModelId == filter.VehicleModelId : true)
+                           && (filter.TransmissionTypeId > 0 ? v.TransmissionTypeId == filter.TransmissionTypeId : true)
+                           && (filter.FuelTypeId > 0 ? v.FuelTypeId == filter.FuelTypeId : true)
+                           && (filter.VehicleClassTypeId > 0 ? v.VehicleClassTypeId == filter.VehicleClassTypeId : true)
+                           && (filter.ColorTypeId > 0 ? v.ColorTypeId == filter.ColorTypeId : true)
+                           && (filter.TireTypeId > 0 ? v.ColorTypeId == filter.TireTypeId : true)
+                           &&
+                           (
+                                (filter.ProductionYearRange.Start.HasValue ? v.ProductionYear >= filter.ProductionYearRange.Start.Value : true)
+                                &&
+                                (filter.ProductionYearRange.End.HasValue ? v.ProductionYear <= filter.ProductionYearRange.End.Value : true)
+                           )
+                          &&
+                          (
+                            (filter.EngineDisplacementRange.Start.HasValue ? v.EngineDisplacement >= filter.EngineDisplacementRange.Start.Value : true)
+                            &&
+                            (filter.EngineDisplacementRange.End.HasValue ? v.EngineDisplacement <= filter.EngineDisplacementRange.Start.Value : true)
+                          )
+                          &&
+                          (
+                            (filter.HorsepowerRange.Start.HasValue ? v.Horsepower >= filter.HorsepowerRange.Start.Value : true)
+                            &&
+                            (filter.HorsepowerRange.End.HasValue ? v.Horsepower <= filter.HorsepowerRange.End.Value : true)
+                          )
+                         select new VehicleListItemDTO
+                         {
+                             FuelTypeName = v.FuelType.Name,
+                             Id = v.Id,
+                             TransmissionTypeName = v.TransmissionType.Name,
+                             VehicleBrandName = v.VehicleModel.VehicleBrand.Name,
+                             VehicleModelName = v.VehicleModel.Name,
+                             ImageUrl = v.VehicleImage.Count() > 0 ? v.VehicleImage.FirstOrDefault().ImageUrl : "",
+                             Price=v.VehicleRentalPrices.Where(p=>p.StartDate <=DateTime.Today && p.EndDate>=DateTime.Today)
+                                                        .OrderBy(p=>p.Price).FirstOrDefault().Price
+
+                         }).ToList();
+            return items;
+        }
+    }
 }
