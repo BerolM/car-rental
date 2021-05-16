@@ -1,0 +1,101 @@
+﻿
+
+@{
+    VehicleDetailViewModel vehicleDetail = ViewBag.VehicleDetail;
+}
+
+<div class="row">
+    <h1>@vehicleDetail.Vehicle.VehicleBrandName @vehicleDetail.Vehicle.VehicleModelName</h1>
+</div>
+<div class="row">
+    <div class="col-8">
+        <div class="row">
+            <div class="col-12">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        @for (int i = 0; i < vehicleDetail.VehicleImages.Count; i++)
+                        {
+                            <div class="carousel-item @(i == 0 ? "active": "")">
+                                <img src="/@vehicleDetail.VehicleImages[i].ImageUrl" class="d-block w-100"
+                                     alt="@vehicleDetail.Vehicle.VehicleBrandName @vehicleDetail.Vehicle.VehicleModelName">
+                            </div>
+                        }
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Önceki</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Sonraki</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h2>Araç Özellikleri</h2>
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <th scope="row"><label class="control-label">Araç Sınıfı:</label></th>
+                            <td>@vehicleDetail.Vehicle.VehicleClassTypeName</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><label class="control-label">Model Yılı:</label></th>
+                            <td>@vehicleDetail.Vehicle.ProductionYear</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><label class="control-label">Renk:</label></th>
+                            <td>@vehicleDetail.Vehicle.ColorTypeName</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><label class="control-label">Motor Hacmi:</label></th>
+                            <td>@vehicleDetail.Vehicle.EngineDisplacement cc</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><label class="control-label">Motor Gücü:</label></th>
+                            <td>@vehicleDetail.Vehicle.Horsepower hp</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><label class="control-label">Yakıt Türü:</label></th>
+                            <td>@vehicleDetail.Vehicle.FuelTypeName</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><label class="control-label">Vites:</label></th>
+                            <td>@vehicleDetail.Vehicle.TransmissionTypeName</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><label class="control-label">Lastik:</label></th>
+                            <td>@vehicleDetail.Vehicle.TireTypeName</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="row">
+            <div class="col-12">
+                @foreach (var vehicleRentalPrice in vehicleDetail.VehicleRentalPrices)
+                {
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item">@vehicleRentalPrice.RentalPeriodName:</li>
+                        <li class="list-group-item">@vehicleRentalPrice.Price.ToString("C", System.Globalization.CultureInfo.CurrentCulture)</li>
+                    </ul>
+                }
+            </div>
+        </div>
+        <div class="row">
+            Kiralama İşlemleri
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $('.carousel').carousel();
+    </script>
+}

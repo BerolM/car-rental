@@ -90,6 +90,12 @@ namespace Application.Services.Concrete
             var items = (from p in Context.VehicleRentalPrice.Include(x => x.Vehicle.VehicleModel.VehicleBrand)
                                                              .Include(x => x.RentalPeriod)
                          where p.VehicleId == filter.VehicleId
+                         &&
+                         (
+                            filter.Date.HasValue == false
+                            ||
+                            (filter.Date.HasValue == true && p.StartDate <= filter.Date.Value && p.EndDate >= filter.Date.Value)
+                         )
                          orderby p.StartDate descending
                          select new VehicleRentalPriceDTO
                          {
