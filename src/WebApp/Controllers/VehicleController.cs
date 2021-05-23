@@ -61,12 +61,33 @@ namespace WebApp.Controllers
 
         public IActionResult Detail(int id)
         {
+            SetVehicleDetailToViewBag(id);
+
+            RentVehicleDTO model = new RentVehicleDTO();
+            model.VehicleId = id;
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Calculate(RentVehicleDTO model)
+        {
+            SetVehicleDetailToViewBag(model.VehicleId);
+     
+            return View("Detail",model);
+        }
+        [HttpPost]
+        public IActionResult Rent(RentVehicleDTO model)
+        {
+            SetVehicleDetailToViewBag(model.VehicleId);
+            return View("Detail", model);
+        }
+        private void SetVehicleDetailToViewBag(int id)
+        {
             VehicleDetailViewModel vehicleDetail = new VehicleDetailViewModel();
             vehicleDetail.Vehicle = VehicleService.GetDetail(id);
             vehicleDetail.VehicleImages = VehicleImageService.GetByVehicle(id);
-            vehicleDetail.VehicleRentalPrices = VehicleRentalPriceService.Get(new VehicleRentalPriceFilter(id,DateTime.Today));
+            vehicleDetail.VehicleRentalPrices = VehicleRentalPriceService.Get(new VehicleRentalPriceFilter(id, DateTime.Today));
             ViewBag.VehicleDetail = vehicleDetail;
-            return View();
         }
 
         private void SetParametersToViewBag()

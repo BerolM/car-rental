@@ -1,18 +1,20 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Application.Services;
+using Domain.Constants;
+using Domain.DTOs;
+using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Application.Services;
-using Domain.DTOs;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Domain.Entities;
 
 namespace WebApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("admin/[controller]/[action]")]
+    [Authorize(AuthenticationSchemes = AuthenticationConstants.AuthenticationScheme,
+               Roles = AuthenticationConstants.OperationClaims.AdminStr)]
     public class VehicleRentalPriceController : Controller
     {
         private IVehicleRentalPriceService VehicleRentalPriceService { get; }
