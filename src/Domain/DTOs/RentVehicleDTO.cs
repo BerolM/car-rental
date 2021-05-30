@@ -15,5 +15,8 @@ namespace Domain.DTOs
 
         [Display(Name = "Tutar")]
         public decimal? Amount { get; set; }
+
+        public int VehicleRentalPriceId { get; set; }
+        public int NumberOfDays { get; set; }
     }
 }

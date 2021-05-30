@@ -4,6 +4,6 @@ namespace Application.Services
 {
     public interface IVehicleRentalPriceCalculatorService
     {
-        Response<decimal> Calculate(RentVehicleDTO rentVehicle);
+        Response<VehicleRentalPriceCalculationResultDTO> Calculate(RentVehicleDTO rentVehicle);
     }
 }

@@ -28,6 +28,8 @@ namespace Application
             services.AddScoped<IVehicleService, VehicleService>();
             services.AddScoped<IVehicleRentalPriceService, VehicleRentalPriceService>();
             services.AddScoped<IVehicleImageService, VehicleImageService>();
+            services.AddScoped<IVehicleRentalPriceCalculatorService, VehicleRentalPriceCalculatorService>();
+            services.AddScoped<IRentVehicleService, RentVehicleService>();
             
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserOperationClaimService, UserOperationClaimService>();
